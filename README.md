@@ -55,9 +55,9 @@ If variable name occurs as a function parameter it doesn't need to be declared a
 
 ### Things to work on
 
-[] Pick computer choice from array
-[] Add loop instead of calling function 5 times
-[] Add GUI...
+- [ ] Pick computer choice from array
+- [ ] Add loop instead of calling function 5 times
+- [ ] Add GUI...
 
 ### Useful resources
 
