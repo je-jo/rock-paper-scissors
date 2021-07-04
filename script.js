@@ -1,40 +1,28 @@
 // global variables
 let playerScore = 0;
 let computerScore = 0;
-
-// // helper functions
-// function uppercase() {
-  
-// }
+let runningScore = `${playerScore} : ${computerScore}`;
 
 
 
 // function to randomly choose rock paper or scissors
 function computerPlay() {
-    let computerSelection = Math.floor(Math.random() * 3);           //returns a random integer between 0 and 2
-    if (computerSelection === 0) {                                  //assigns string values to function results
-        return "ROCK";
-    } else if (computerSelection === 1) {
-        return "PAPER";
-    } else {
-        return "SCISSORS";
-    }
+    let computerSelection = ["ROCK", "PAPER", "SCISSORS"];
+    return computerSelection[Math.floor(Math.random() * computerSelection.length)];
 }
 
 
 // function to play a single round
 function playRound(playerSelection, computerSelection) {
 
-    playerSelection = prompt("Rock, paper, scissors?", "");   //get input from user  
-    playerSelection = playerSelection.toUpperCase();
+    playerSelection = prompt("Rock, paper, scissors?", "").toUpperCase();  //get input from user  
     console.log(`You chose ${playerSelection}`);
 
     computerSelection = computerPlay();
     console.log(`The Machine chose ${computerSelection}`);
 
-
     if (playerSelection === computerSelection) {
-        return "It's a tie! play again!";
+        return "It's a tie, play again!";
     }
     else if (playerSelection === "ROCK") {
         if (computerSelection === "PAPER") {
@@ -62,18 +50,16 @@ function playRound(playerSelection, computerSelection) {
             playerScore += 1;
             return `You win! Scissors beat paper! You have ${playerScore} points.`;
         }
-    }
-    console.log(`You: ${playerScore}; The Machine: ${computerScore};`);
+    } 
 }
 
 
-// function to play 5 rounds and declare winner, add loop later
+// function to play 5 rounds and declare winner
 function game() {
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    playRound();
+    for (let gamesPlayed = 0; gamesPlayed < 5; gamesPlayed++) {
+        playRound();
+        console.log(`You: ${playerScore}; The Machine: ${computerScore};`);
+    }
     if (playerScore > computerScore) {
         return "You fought the Machine and you WON!";
     } else if (playerScore < computerScore) {
@@ -82,3 +68,6 @@ function game() {
         return "It's a tie!";
     }
 }
+
+
+

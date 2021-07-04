@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="script.js"></script>  
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+    <!-- icons -->
+    <script src="https://kit.fontawesome.com/08e000e9f5.js" crossorigin="anonymous"></script>
+
 </head>
+
 <body>
     <div class="page-wrapper">
-        <h1>You Against The Machine!</h1>
-        <h2>A rock-paper-scissors game</h2>
+        <h1>Rock-Paper-Scissors!</h1>
+        <!-- <h2>First to 5 wins</h2> -->
         <main>
-            <div class="player-choice">
-                <button>Rock</button>
-                <button>Paper</button>
-                <button>Scissors</button>
+            <div class="game">
+                <div class="player-choice">
+                    <div class="title">
+                        <h3>You</h3>
+                    </div>
+                    <div class="choice">
+                        <button><i class="fas fa-hand-rock"></i></button>
+                        <button><i class="fas fa-hand-paper"></i></button>
+                        <button><i class="fas fa-hand-scissors"></i></button>
+                    </div>
+                </div>
+                <div class="middle">
+                    <h3>Against</h3>
+                </div>
+                <div class="machine-choice">
+                    <div class="title">
+                        <h3>The Machine!</h3>
+                    </div>
+                    <div class="choice">
+                        <button><i class="fas fa-hand-rock"></i></button>
+                        <button><i class="fas fa-hand-paper"></i></button>
+                        <button><i class="fas fa-hand-scissors"></i></button>
+                    </div>
+                </div>
             </div>
-            <div class="machine-choice">
-                <button>Rock</button>
-                <button>Paper</button>
-                <button>Scissors</button>
-            </div>
-            <div class="total-score">
-                <p>Total Score: </p>
+            <div class="result">
+                <p>Result: </p>
             </div>
         </main>
+        <footer>
+            <p>Coded by <a href="https://github.com/je-jo">Jelena Jovicic</a>, 2021</p>
+        </footer>
     </div>
+    <script type="text/javascript" src="script.js"></script>
 </body>
+
 </html>

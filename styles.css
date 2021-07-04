@@ -1,43 +1,91 @@
 @import url(minireset.css);
 
-* {
+/* * {
     outline: 1px solid red;
-}
+} */
 
 html, body {
     width: 100%;
     height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size: 15px;
     text-align: center;
+    color: #222;
 }
 
 .page-wrapper {
     height: 100%;
-    background-color: #68736a;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 3rem;
+    padding: 3rem 0;
 }
 
 h2 {
-    font-size: 2rem;
-    font-style: italic;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    padding: 1.2rem;
+}
+
+.choice {
+    margin: 1.8rem 0;
+}
+
+i {
+    font-size: 3rem;
 }
 
 button {
-    height: 150px;
-    width: 150px;
-    color: lightgray;
-    border: 1px solid lightgray;
-    border-radius: 15px;
+    height: 100px;
+    width: 100px;
+    margin: 3px;
+    background-color: #fff;
+    color: grey;
+    border: 3px solid #fdd835;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
-button:hover {
+button:hover, button:active {
+    color: grey;
+    background-color: #fdd835;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: #fff;
+}
+
+footer a {
     color: #222;
+    text-decoration: none;
 }
 
-button:active {
-    color: red;
+footer a:hover {
+    color: #fdd835;
 }
+
+@media screen and (min-width: 600px) {
+
+    html {
+font-size: 20px;
+    }
+
+    .game {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
