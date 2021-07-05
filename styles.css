@@ -1,5 +1,9 @@
 @import url(minireset.css);
 
+:root {
+    --accent: #fdd835;
+}
+
 /* * {
     outline: 1px solid red;
 } */
@@ -51,14 +55,14 @@ button {
     margin: 3px;
     background-color: #fff;
     color: grey;
-    border: 3px solid #fdd835;
+    border: 3px solid var(--accent);
     border-radius: 50%;
     cursor: pointer;
 }
 
 button:hover, button:active {
-    color: grey;
-    background-color: #fdd835;
+    background-color: grey;
+    color: var(--accent);
 }
 
 footer {
@@ -74,7 +78,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #fdd835;
+    color: var(--accent);
 }
 
 @media screen and (min-width: 600px) {
