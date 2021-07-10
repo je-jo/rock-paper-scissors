@@ -62,6 +62,8 @@ If variable name occurs as a function parameter it doesn't need to be declared a
 ### Useful resources
 
 - [Minireset](https://awesomeopensource.com/project/jgthms/minireset.css?categoryPage=29) - A tiny modern CSS reset. 
+- fontawesome
+- [This stackoverflow thread](https://stackoverflow.com/questions/22270664/how-to-remove-a-class-from-elements-in-pure-javascript) for the information about removing classes from all elements in a HTMLCollection.
 
 ## Author
 
