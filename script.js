@@ -1,8 +1,10 @@
 let playerScore = 0;
 let computerScore = 0;
-runningScore = `${playerScore} : ${computerScore}`;
-// let playerSelection = ["ROCK", "PAPER", "SCISSORS"];
 let computerSelection;
+let newgame;
+const result = document.querySelector('#result');
+result.textContent = "0 : 0";
+
 const crock = document.querySelector("#c-rock");
 const cpaper = document.querySelector("#c-paper");
 const cscissors = document.querySelector("#c-scissors");
@@ -13,7 +15,7 @@ function computerPlay() {
     return computerSelection[Math.floor(Math.random() * computerSelection.length)];
 }
 
-function compSelAdd(computerSelection) {
+function addActive(computerSelection) {
     if (computerSelection == "ROCK") {
         crock.classList.add("active");
     }
@@ -39,6 +41,7 @@ prock.addEventListener("click", () => {
     playRound("ROCK", computerSelection);
     prock.classList.add("active");
     console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
+    game();
 });
 
 const ppaper = document.querySelector("#p-paper");
@@ -47,7 +50,7 @@ ppaper.addEventListener("click", () => {
     playRound("PAPER", computerSelection);
     ppaper.classList.add("active");
     console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
-    console.log(`total ${runningScore}`)
+    game();
 });
 
 const pscissors = document.querySelector("#p-scissors");
@@ -56,6 +59,7 @@ pscissors.addEventListener("click", () => {
     playRound("SCISSORS", computerSelection);
     pscissors.classList.add("active");
     console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
+    game();
 });
 
 
@@ -67,59 +71,111 @@ function playRound(playerSelection, computerSelection) {
     console.log(`You chose ${playerSelection}`);
 
     computerSelection = computerPlay();
-    compSelAdd(computerSelection);
+    addActive(computerSelection);
     console.log(`The Machine chose ${computerSelection}`);
-    
+
 
 
     if (playerSelection === computerSelection) {
-        return "It's a tie, play again!";
+        round.textContent = "It's a tie, play again!";
     }
 
     else if (playerSelection === "ROCK") {
         if (computerSelection === "PAPER") {
             computerScore += 1;
-            return `You lose! Paper beats rock! The Machine has ${computerScore} points.`;
+            round.textContent = `You lose! Paper covers rock! The Machine has ${computerScore} points.`;
         } else if (computerSelection === "SCISSORS") {
             playerScore += 1;
-            return `You win! Rock beats scissors! You have ${playerScore} points.`;
+            round.textContent = `You win! Rock crushes scissors! You have ${playerScore} points.`;
         }
     }
 
     else if (playerSelection === "PAPER") {
         if (computerSelection === "SCISSORS") {
             computerScore += 1;
-            return `You lose! Scissors beat paper! The Machine has ${computerScore} points.`;
+            round.textContent = `You lose! Scissors cut paper! The Machine has ${computerScore} points.`;
         } else if (computerSelection === "ROCK") {
             playerScore += 1;
-            return `You win! Paper beats rock! You have ${playerScore} points.`;
+            round.textContent = `You win! Paper covers rock! You have ${playerScore} points.`;
         }
     }
 
     else if (playerSelection === "SCISSORS") {
         if (computerSelection === "ROCK") {
             computerScore += 1;
-            return `You lose! Rock beats scissors! The Machine has ${computerScore} points.`;
+            round.textContent = `You lose! Rock crushes scissors! The Machine has ${computerScore} points.`;
         } else if (computerSelection === "PAPER") {
             playerScore += 1;
-            return `You win! Scissors beat paper! You have ${playerScore} points.`;
+            round.textContent = `You win! Scissors cut paper! You have ${playerScore} points.`;
         }
     }
+
 }
+
+const endmessage = document.querySelector('#endmessage');
+const round = document.querySelector('#round');
 
 // function to play 5 rounds and declare winner
 function game() {
-    for (let gamesPlayed = 0; gamesPlayed < 5; gamesPlayed++) {
-        playRound();
-        console.log(`You: ${playerScore}; The Machine: ${computerScore};`);
-        runningScore = `${playerScore} : ${computerScore}`;
-        console.log(runningScore);
-    }
-    if (playerScore > computerScore) {
-        return "You fought the Machine and you WON!";
-    } else if (playerScore < computerScore) {
-        return "You fought the Machine and you LOST!";
-    } else {
-        return "It's a tie!";
+    let runningScore = `${playerScore} : ${computerScore}`;
+    result.textContent = `${runningScore}`;
+
+
+    if (playerScore == 5 || computerScore == 5) {
+
+        // disable all other buttons
+
+        if (playerScore > computerScore) {
+            endmessage.innerHTML = "<p>You fought the Machine and you WON!<p>"
+            const newgame = document.createElement('button');
+            newgame.textContent = 'New Game';
+
+            newgame.addEventListener("click", () => {
+                playerScore = 0;
+                computerScore = 0;
+                runningScore = `${playerScore} : ${computerScore}`;
+                result.textContent = `${runningScore}`;
+                removeActive();
+            });
+
+            endmessage.appendChild(newgame);
+            
+
+
+
+
+
+        } else if (playerScore < computerScore) {
+            endmessage.innerHTML = "<p>You fought the Machine and you LOST!</p>"
+            const newgame = document.createElement('button');
+            newgame.textContent = 'New Game';
+
+            newgame.addEventListener("click", () => {
+                playerScore = 0;
+                computerScore = 0;
+                runningScore = `${playerScore} : ${computerScore}`;
+                result.textContent = `${runningScore}`;
+                removeActive();
+            });
+
+            endmessage.appendChild(newgame);
+            
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
