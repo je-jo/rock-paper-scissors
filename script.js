@@ -1,21 +1,73 @@
 let playerScore = 0;
 let computerScore = 0;
 let computerSelection;
-let newgame;
-const result = document.querySelector('#result');
-result.textContent = "0 : 0";
 
+
+
+const main = document.querySelector("main");
+const result = document.querySelector('#result');
+
+const buttons = document.querySelectorAll("div.choice>button");
+
+const prock = document.querySelector("#p-rock");
+const ppaper = document.querySelector("#p-paper");
+const pscissors = document.querySelector("#p-scissors");
 const crock = document.querySelector("#c-rock");
 const cpaper = document.querySelector("#c-paper");
 const cscissors = document.querySelector("#c-scissors");
 
 
-function computerPlay() {
-    computerSelection = ["ROCK", "PAPER", "SCISSORS"];
-    return computerSelection[Math.floor(Math.random() * computerSelection.length)];
+
+const newgame = document.createElement('button');
+
+// the clicks
+prock.addEventListener("click", () => {
+    removeActive();
+    playRound("ROCK", computerSelection);
+    prock.classList.add("active");
+    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
+    game();
+});
+
+
+ppaper.addEventListener("click", () => {
+    removeActive();
+    playRound("PAPER", computerSelection);
+    ppaper.classList.add("active");
+    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
+    game();
+});
+
+
+pscissors.addEventListener("click", () => {
+    removeActive();
+    playRound("SCISSORS", computerSelection);
+    pscissors.classList.add("active");
+    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
+    game();
+});
+
+newgame.addEventListener("click", () => {
+    playerScore = 0;
+    computerScore = 0;
+    updateScore();
+    removeActive();
+    main.removeChild(endmessage);
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false;
+    }
+});
+
+
+function updateScore() {
+    let runningScore = `${playerScore} : ${computerScore}`;
+    result.textContent = `${runningScore}`;
+
 }
 
-function addActive(computerSelection) {
+function computerPlay() {
+    computerSelection = ["ROCK", "PAPER", "SCISSORS"];
+    computerSelection = computerSelection[Math.floor(Math.random() * computerSelection.length)];
     if (computerSelection == "ROCK") {
         crock.classList.add("active");
     }
@@ -25,7 +77,9 @@ function addActive(computerSelection) {
     else if (computerSelection == "SCISSORS") {
         cscissors.classList.add("active");
     }
+    return computerSelection;
 }
+
 
 function removeActive() {
     const active = document.getElementsByClassName("active");
@@ -34,47 +88,14 @@ function removeActive() {
     }
 };
 
-// the clicks
-const prock = document.querySelector("#p-rock");
-prock.addEventListener("click", () => {
-    removeActive();
-    playRound("ROCK", computerSelection);
-    prock.classList.add("active");
-    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
-    game();
-});
-
-const ppaper = document.querySelector("#p-paper");
-ppaper.addEventListener("click", () => {
-    removeActive();
-    playRound("PAPER", computerSelection);
-    ppaper.classList.add("active");
-    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
-    game();
-});
-
-const pscissors = document.querySelector("#p-scissors");
-pscissors.addEventListener("click", () => {
-    removeActive();
-    playRound("SCISSORS", computerSelection);
-    pscissors.classList.add("active");
-    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
-    game();
-});
-
-
-
-
 // function to play a single round
 function playRound(playerSelection, computerSelection) {
+    const round = document.querySelector('#round');
 
     console.log(`You chose ${playerSelection}`);
 
     computerSelection = computerPlay();
-    addActive(computerSelection);
     console.log(`The Machine chose ${computerSelection}`);
-
-
 
     if (playerSelection === computerSelection) {
         round.textContent = "It's a tie, play again!";
@@ -112,70 +133,32 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-const endmessage = document.querySelector('#endmessage');
-const round = document.querySelector('#round');
-
 // function to play 5 rounds and declare winner
 function game() {
-    let runningScore = `${playerScore} : ${computerScore}`;
-    result.textContent = `${runningScore}`;
-
-
+    const endmessage = document.createElement("div");
+    endmessage.setAttribute('id', 'endmessage');
+    const win = document.createElement('i');
+    const para = document.createElement('p');
+    newgame.textContent = 'New Game';
+    endmessage.appendChild(win);
+    endmessage.appendChild(para)
+    endmessage.appendChild(newgame);
+    updateScore();
     if (playerScore == 5 || computerScore == 5) {
-
-        // disable all other buttons
-
-        if (playerScore > computerScore) {
-            endmessage.innerHTML = "<p>You fought the Machine and you WON!<p>"
-            const newgame = document.createElement('button');
-            newgame.textContent = 'New Game';
-
-            newgame.addEventListener("click", () => {
-                playerScore = 0;
-                computerScore = 0;
-                runningScore = `${playerScore} : ${computerScore}`;
-                result.textContent = `${runningScore}`;
-                removeActive();
-            });
-
-            endmessage.appendChild(newgame);
-            
-
-
-
-
-
-        } else if (playerScore < computerScore) {
-            endmessage.innerHTML = "<p>You fought the Machine and you LOST!</p>"
-            const newgame = document.createElement('button');
-            newgame.textContent = 'New Game';
-
-            newgame.addEventListener("click", () => {
-                playerScore = 0;
-                computerScore = 0;
-                runningScore = `${playerScore} : ${computerScore}`;
-                result.textContent = `${runningScore}`;
-                removeActive();
-            });
-
-            endmessage.appendChild(newgame);
-            
+        round.textContent = "";
+        main.insertBefore(endmessage, result);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
         }
-
+        if (playerScore > computerScore) {
+            win.classList.add("far", "fa-grin-alt");
+            para.textContent = "You fought the Machine and you WON!"
+        } else if (playerScore < computerScore) {
+            win.classList.add("far", "fa-frown-open");
+            para.textContent = "You fought the Machine and you LOST!"
+        }
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+updateScore();
 

@@ -61,13 +61,20 @@ button {
 }
 
 button.player-choice:hover {
-    background-color: grey;
+    background-color: lightgray;
     color: var(--accent);
 }
 
 .active {
-    background-color: grey;
+    background-color: lightgray;
     color: var(--accent);
+}
+
+button:disabled, button:disabled:hover {
+    color:lightgray;
+    border-color: lightgray;
+    background-color: white;
+    cursor: default;
 }
 
 #result {
