@@ -18,7 +18,7 @@ const cscissors = document.querySelector("#c-scissors");
 
 
 
-const newgame = document.createElement('button');
+const newgame = document.createElement('div');
 
 // the clicks
 prock.addEventListener("click", () => {
@@ -138,7 +138,9 @@ function game() {
     const endmessage = document.createElement("div");
     endmessage.setAttribute('id', 'endmessage');
     const win = document.createElement('i');
+    win.style.fontSize = "7rem";
     const para = document.createElement('p');
+    newgame.setAttribute('id', 'newgame');
     newgame.textContent = 'New Game';
     endmessage.appendChild(win);
     endmessage.appendChild(para)
@@ -147,14 +149,14 @@ function game() {
     if (playerScore == 5 || computerScore == 5) {
         round.textContent = "";
         main.insertBefore(endmessage, result);
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].disabled = true;
-        }
+        // for (let i = 0; i < buttons.length; i++) {
+        //      buttons[i].disabled = true;
+        // }
         if (playerScore > computerScore) {
-            win.classList.add("far", "fa-grin-alt");
+            win.classList.add("fas", "fa-grin-stars");
             para.textContent = "You fought the Machine and you WON!"
         } else if (playerScore < computerScore) {
-            win.classList.add("far", "fa-frown-open");
+            win.classList.add("fas", "fa-dizzy");
             para.textContent = "You fought the Machine and you LOST!"
         }
     }
