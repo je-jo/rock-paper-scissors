@@ -1,139 +1,129 @@
 let playerScore = 0;
 let computerScore = 0;
 let computerSelection;
-
-
+let playerSelection;
 
 const main = document.querySelector("main");
-const result = document.querySelector('#result');
+// const buttons = document.querySelectorAll("div.choice>button");
+// const machineButtons = document.querySelectorAll("div.machine-choice>button");
 
-const buttons = document.querySelectorAll("div.choice>button");
 
-const prock = document.querySelector("#p-rock");
-const ppaper = document.querySelector("#p-paper");
-const pscissors = document.querySelector("#p-scissors");
+// function rotate() {
+    
+//     for (let num = 0; num < machineButtons.length; num++) {
+//         machineButtons[num].classList.add('rotate');
+//     }
+// };
+
+const active = document.getElementsByClassName("active");
+
+const prock = document.querySelector("#rock");
+const ppaper = document.querySelector("#paper");
+const pscissors = document.querySelector("#scissors");
 const crock = document.querySelector("#c-rock");
 const cpaper = document.querySelector("#c-paper");
 const cscissors = document.querySelector("#c-scissors");
 
 
+const tink = document.getElementById("tink");
+const openhat = document.getElementById("openhat");
+const boom = document.getElementById("boom");
 
-const newgame = document.createElement('div');
 
-// the clicks
-prock.addEventListener("click", () => {
-    removeActive();
-    playRound("ROCK", computerSelection);
-    prock.classList.add("active");
-    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
-    game();
+const playerButtons = document.querySelectorAll("div.player-choice>button");
+playerButtons.forEach((button) => {
+    button.addEventListener('click', function (e) {
+        removeActive();
+        playerSelection = e.currentTarget.id;
+        tink.currentTime = 0;
+        tink.play();
+        playRound(playerSelection, computerSelection);
+        e.currentTarget.classList.add("active");
+        console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
+        game();
+    });
 });
-
-
-ppaper.addEventListener("click", () => {
-    removeActive();
-    playRound("PAPER", computerSelection);
-    ppaper.classList.add("active");
-    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
-    game();
-});
-
-
-pscissors.addEventListener("click", () => {
-    removeActive();
-    playRound("SCISSORS", computerSelection);
-    pscissors.classList.add("active");
-    console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
-    game();
-});
-
-newgame.addEventListener("click", () => {
-    playerScore = 0;
-    computerScore = 0;
-    updateScore();
-    removeActive();
-    main.removeChild(endmessage);
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].disabled = false;
-    }
-});
-
-
-function updateScore() {
-    let runningScore = `${playerScore} : ${computerScore}`;
-    result.textContent = `${runningScore}`;
-
-}
 
 function computerPlay() {
-    computerSelection = ["ROCK", "PAPER", "SCISSORS"];
+    computerSelection = ["rock", "paper", "scissors"];
     computerSelection = computerSelection[Math.floor(Math.random() * computerSelection.length)];
-    if (computerSelection == "ROCK") {
+    if (computerSelection == "rock") {
         crock.classList.add("active");
     }
-    else if (computerSelection == "PAPER") {
+    else if (computerSelection == "paper") {
         cpaper.classList.add("active");
     }
-    else if (computerSelection == "SCISSORS") {
+    else if (computerSelection == "scissors") {
         cscissors.classList.add("active");
     }
     return computerSelection;
 }
 
-
 function removeActive() {
-    const active = document.getElementsByClassName("active");
     for (let i = active.length - 1; i >= 0; i--) {
-        active[i].classList.remove('active');
+       active[i].classList.remove('active', 'win');
     }
-};
+ };
 
-// function to play a single round
+//  function removeRotate() {
+//     for (let num = 0; num < machineButtons.length; num++) {
+//         machineButtons[num].classList.remove('rotate');
+//     }
+// };
+
+
+
 function playRound(playerSelection, computerSelection) {
     const round = document.querySelector('#round');
-
     console.log(`You chose ${playerSelection}`);
-
     computerSelection = computerPlay();
     console.log(`The Machine chose ${computerSelection}`);
-
     if (playerSelection === computerSelection) {
         round.textContent = "It's a tie, play again!";
     }
-
-    else if (playerSelection === "ROCK") {
-        if (computerSelection === "PAPER") {
+    else if (playerSelection === "rock") {
+        if (computerSelection === "paper") {
             computerScore += 1;
-            round.textContent = `You lose! Paper covers rock! The Machine has ${computerScore} points.`;
-        } else if (computerSelection === "SCISSORS") {
+            cpaper.classList.add("win");
+            round.textContent = `You lose! paper covers rock! The Machine has ${computerScore} points.`;
+        } else if (computerSelection === "scissors") {
             playerScore += 1;
-            round.textContent = `You win! Rock crushes scissors! You have ${playerScore} points.`;
+            prock.classList.add("win");
+            round.textContent = `You win! rock crushes scissors! You have ${playerScore} points.`;
         }
     }
-
-    else if (playerSelection === "PAPER") {
-        if (computerSelection === "SCISSORS") {
+    else if (playerSelection === "paper") {
+        if (computerSelection === "scissors") {
             computerScore += 1;
-            round.textContent = `You lose! Scissors cut paper! The Machine has ${computerScore} points.`;
-        } else if (computerSelection === "ROCK") {
+            cscissors.classList.add("win");
+            round.textContent = `You lose! scissors cut paper! The Machine has ${computerScore} points.`;
+        } else if (computerSelection === "rock") {
             playerScore += 1;
-            round.textContent = `You win! Paper covers rock! You have ${playerScore} points.`;
+            ppaper.classList.add("win");
+            round.textContent = `You win! paper covers rock! You have ${playerScore} points.`;
         }
     }
-
-    else if (playerSelection === "SCISSORS") {
-        if (computerSelection === "ROCK") {
+    else if (playerSelection === "scissors") {
+        if (computerSelection === "rock") {
             computerScore += 1;
-            round.textContent = `You lose! Rock crushes scissors! The Machine has ${computerScore} points.`;
-        } else if (computerSelection === "PAPER") {
+            crock.classList.add("win");
+            round.textContent = `You lose! rock crushes scissors! The Machine has ${computerScore} points.`;
+        } else if (computerSelection === "paper") {
             playerScore += 1;
-            round.textContent = `You win! Scissors cut paper! You have ${playerScore} points.`;
+            pscissors.classList.add("win");
+            round.textContent = `You win! scissors cut paper! You have ${playerScore} points.`;
         }
     }
-
 }
 
-// function to play 5 rounds and declare winner
+
+
+function updateScore() {
+    const result = document.querySelector('#result');
+    let runningScore = `${playerScore} : ${computerScore}`;
+    result.textContent = `${runningScore}`;
+}
+
 function game() {
     const endmessage = document.createElement("div");
     endmessage.setAttribute('id', 'endmessage');
@@ -148,19 +138,33 @@ function game() {
     updateScore();
     if (playerScore == 5 || computerScore == 5) {
         round.textContent = "";
-        main.insertBefore(endmessage, result);
+        main.appendChild(endmessage);
         // for (let i = 0; i < buttons.length; i++) {
         //      buttons[i].disabled = true;
         // }
         if (playerScore > computerScore) {
             win.classList.add("fas", "fa-grin-stars");
             para.textContent = "You fought the Machine and you WON!"
+            openhat.play();
         } else if (playerScore < computerScore) {
             win.classList.add("fas", "fa-dizzy");
             para.textContent = "You fought the Machine and you LOST!"
+            boom.play();
         }
     }
 }
+
+const newgame = document.createElement('div');
+newgame.addEventListener("click", () => {
+    playerScore = 0;
+    computerScore = 0;
+    updateScore();
+    removeActive();
+    main.removeChild(endmessage);
+    // for (let i = 0; i < buttons.length; i++) {
+    //     buttons[i].disabled = false;
+    // }
+});
 
 updateScore();
 
