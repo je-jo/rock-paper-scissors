@@ -39,12 +39,12 @@ main {
     padding: 1rem;
 }
 
-.centerpage {
+/* .centerpage {
     display: flex;
     flex-direction: column;
     justify-self: flex-start;
     justify-content: flex-start;
-}
+} */
 
 h1 {
     font-size: 1.5rem;
@@ -87,12 +87,14 @@ button.player-choice:hover, .active, .win {
 }
 
 .win {
-    box-shadow: inset 0px 0px 0px 7px rgba(255, 214, 0, 1);
+    /* color: rgba(255, 214, 0, 1) !important; */
+    border-color: rgba(255, 214, 0, 1);
+    box-shadow: 0px 0px 3px 3px rgba(255, 214, 0, 0.5);
 }
 
 .rotate {
     animation-name: rotate;
-    animation-duration: 0.5s;
+    animation-duration: 400ms;
 }
 
 @keyframes rotate {
@@ -149,7 +151,6 @@ button:disabled, button:disabled:hover {
     justify-content: space-evenly;
     align-items: center;
     z-index: 100;
-    border: 1px solid black;
 }
 
 #round {

@@ -4,18 +4,25 @@ let computerSelection;
 let playerSelection;
 
 const main = document.querySelector("main");
-// const buttons = document.querySelectorAll("div.choice>button");
-// const machineButtons = document.querySelectorAll("div.machine-choice>button");
+const buttons = document.querySelectorAll("div.choice>button");
+const machineButtons = document.getElementsByClassName("machine-button");
 
 
-// function rotate() {
-    
-//     for (let num = 0; num < machineButtons.length; num++) {
-//         machineButtons[num].classList.add('rotate');
-//     }
-// };
+
+function addRotate() {
+    for (let num = 0; num < machineButtons.length; num++) {
+        machineButtons[num].classList.add('rotate');
+        buttons.forEach(button => button.addEventListener("animationend", removeRotate));
+    }
+};
+function removeRotate() {
+    for (let n = rotate.length - 1; n >= 0; n--) {
+        rotate[n].classList.remove("rotate");
+    }
+};
 
 const active = document.getElementsByClassName("active");
+const rotate = document.getElementsByClassName("rotate");
 
 const prock = document.querySelector("#rock");
 const ppaper = document.querySelector("#paper");
@@ -31,15 +38,17 @@ const boom = document.getElementById("boom");
 
 
 const playerButtons = document.querySelectorAll("div.player-choice>button");
+
 playerButtons.forEach((button) => {
     button.addEventListener('click', function (e) {
+        addRotate();
         removeActive();
         playerSelection = e.currentTarget.id;
         tink.currentTime = 0;
         tink.play();
         playRound(playerSelection, computerSelection);
         e.currentTarget.classList.add("active");
-        console.log(`You: ${playerScore}; The Machine: ${computerScore};`)
+        console.log(`You: ${playerScore}; The Machine: ${computerScore};`);
         game();
     });
 });
@@ -48,28 +57,30 @@ function computerPlay() {
     computerSelection = ["rock", "paper", "scissors"];
     computerSelection = computerSelection[Math.floor(Math.random() * computerSelection.length)];
     if (computerSelection == "rock") {
-        crock.classList.add("active");
+        setTimeout(function () {
+            crock.classList.add("active");
+        }, 400);
     }
     else if (computerSelection == "paper") {
-        cpaper.classList.add("active");
+        setTimeout(function () {
+            cpaper.classList.add("active");
+        }, 400);
     }
     else if (computerSelection == "scissors") {
-        cscissors.classList.add("active");
+        setTimeout(function () {
+            cscissors.classList.add("active");
+        }, 400);
     }
     return computerSelection;
 }
 
 function removeActive() {
     for (let i = active.length - 1; i >= 0; i--) {
-       active[i].classList.remove('active', 'win');
+        active[i].classList.remove('active', 'win');
     }
- };
+};
 
-//  function removeRotate() {
-//     for (let num = 0; num < machineButtons.length; num++) {
-//         machineButtons[num].classList.remove('rotate');
-//     }
-// };
+
 
 
 
@@ -84,33 +95,45 @@ function playRound(playerSelection, computerSelection) {
     else if (playerSelection === "rock") {
         if (computerSelection === "paper") {
             computerScore += 1;
-            cpaper.classList.add("win");
+            setTimeout(function () {
+                cpaper.classList.add("win");
+            }, 450);
             round.textContent = `You lose! paper covers rock! The Machine has ${computerScore} points.`;
         } else if (computerSelection === "scissors") {
             playerScore += 1;
-            prock.classList.add("win");
+            setTimeout(function () {
+                prock.classList.add("win");
+            }, 450);
             round.textContent = `You win! rock crushes scissors! You have ${playerScore} points.`;
         }
     }
     else if (playerSelection === "paper") {
         if (computerSelection === "scissors") {
             computerScore += 1;
-            cscissors.classList.add("win");
+            setTimeout(function () {
+                cscissors.classList.add("win");
+            }, 450);
             round.textContent = `You lose! scissors cut paper! The Machine has ${computerScore} points.`;
         } else if (computerSelection === "rock") {
             playerScore += 1;
-            ppaper.classList.add("win");
+            setTimeout(function () {
+                ppaper.classList.add("win");
+            }, 450);
             round.textContent = `You win! paper covers rock! You have ${playerScore} points.`;
         }
     }
     else if (playerSelection === "scissors") {
         if (computerSelection === "rock") {
             computerScore += 1;
-            crock.classList.add("win");
+            setTimeout(function () {
+                crock.classList.add("win");
+            }, 450);
             round.textContent = `You lose! rock crushes scissors! The Machine has ${computerScore} points.`;
         } else if (computerSelection === "paper") {
             playerScore += 1;
-            pscissors.classList.add("win");
+            setTimeout(function () {
+                pscissors.classList.add("win");
+            }, 450);
             round.textContent = `You win! scissors cut paper! You have ${playerScore} points.`;
         }
     }
@@ -138,10 +161,12 @@ function game() {
     updateScore();
     if (playerScore == 5 || computerScore == 5) {
         round.textContent = "";
-        main.appendChild(endmessage);
-        // for (let i = 0; i < buttons.length; i++) {
-        //      buttons[i].disabled = true;
-        // }
+        setTimeout(function () {
+            main.appendChild(endmessage);
+        }, 1500);
+         for (let i = 0; i < buttons.length; i++) {
+              buttons[i].disabled = true;
+         }
         if (playerScore > computerScore) {
             win.classList.add("fas", "fa-grin-stars");
             para.textContent = "You fought the Machine and you WON!"
@@ -161,10 +186,9 @@ newgame.addEventListener("click", () => {
     updateScore();
     removeActive();
     main.removeChild(endmessage);
-    // for (let i = 0; i < buttons.length; i++) {
-    //     buttons[i].disabled = false;
-    // }
+     for (let i = 0; i < buttons.length; i++) {
+         buttons[i].disabled = false;
+     }
 });
 
 updateScore();
-
