@@ -1,9 +1,6 @@
 # The Odin Project - Rock, Paper, Scissors
 
-A simple implementation of a "rock paper scissors" game, built for for [The Odin Project](https://www.theodinproject.com).
-
-Currently played from console only.
-
+A "Rock, Paper, Scissors" game, built for for [The Odin Project](https://www.theodinproject.com).
 
 ## Table of contents
 
@@ -13,57 +10,72 @@ Currently played from console only.
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [Things to remember](#things-to-remember)
-  - [Things to work on](#things-to-work-on)
+  - [Things I learned](#things-i-learned)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 
 ## Overview
 
-### Instructions
+### Description
 
-- Begin with a function called computerPlay that will randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
+The player is presented with two sets of buttons - player's choice and (unclickable) computer choice. Running score is also shown.
 
-- Write a function that plays a single round of Rock Paper Scissors. The function should take two parameters - the playerSelection and computerSelection - and then return a string that declares the winner of the round like so: "You Lose! Paper beats Rock".
+Once the player clicks on a button:
 
-  - Use prompt() to get input from the user. Make your function’s playerSelection parameter case-insensitive (so users can input rock, ROCK, RocK or any other variation).
+- A sound is played.
+- A flip animation is played on computer choice buttons. 
+- Both player's and computer choice buttons change in color and size.
+- The round winner button gets another color change.
+- A text message declares the round winner.
 
-  - Important note: you want to return the results of this function call, not console.log() them. To test this function console.log the results.
+Once either player or computer reach 5 points: 
 
-- Write a NEW function called game(). Use the previous function inside of this one to play a 5 round game that keeps score and reports a winner or loser at the end. Loops are covered later, so just call your playRound function 5 times in a row. At this point you should be using console.log() to display the results of each round and the winner at the end.
-
-- Feel free to create more “helper” functions if you think it would be useful.
-
-
+- A win or lose sound is played.
+- Buttons get disabled.
+- A fullscreen endgame message appears.
+- A "New game" button is displayed.
 
 ### Screenshot
 
-No GUI yet, to be added.
+![](images/rps.png)
 
 ### Links
 
 - [Solution](https://github.com/je-jo/rock-paper-scissors)
-- Live site to be added.
+- [Live Site](https://je-jo.github.io/rock-paper-scissors/)
 
 ## My process
 
 ### Built with
 
-### Things to remember
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- Mobile-first workflow
+- Javascript
 
-If variable name occurs as a function parameter it doesn't need to be declared again with the let keyword. 
+### Things I learned
 
-### Things to work on
+Stage 1 - CLI
 
-- [x] Pick computer choice from array
-- [x] Add loop instead of calling function 5 times
-- [ ] Add GUI...
+- How to randomly pick items from an array.
+- Function scope and functions working together. 
+- Using loop.
+
+Phase 2 - GUI
+
+- Working with event listeners.
+- First time using sound.
+- Manipulate the DOM.
+- Timing functions.
 
 ### Useful resources
 
 - [Minireset](https://awesomeopensource.com/project/jgthms/minireset.css?categoryPage=29) - A tiny modern CSS reset. 
-- fontawesome
-- [This stackoverflow thread](https://stackoverflow.com/questions/22270664/how-to-remove-a-class-from-elements-in-pure-javascript) for the information about removing classes from all elements in a HTMLCollection.
+- [Fontawesome icons](https://fontawesome.com/)
+- [This stackoverflow thread](https://stackoverflow.com/questions/22270664/how-to-remove-a-class-from-elements-in-pure-javascript) was helpful for me to understand that HTMLCollection is "live" as oposed to node list.
+- [Box Shadows](https://box-shadow.dev/) A fun and useful tool for playing around with box shadows.
+- [Wes Bos' Make a JS Drum Kit video](https://www.youtube.com/watch?v=VuN8qwZoego) - A great event listeners video tutorial. I also used sound files from this project.
 
 ## Author
 
