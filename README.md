@@ -5,7 +5,7 @@ A "Rock, Paper, Scissors" game, built for for [The Odin Project](https://www.the
 ## Table of contents
 
 - [Overview](#overview)
-  - [Instructions](#instructions)
+  - [Description](#description)
   - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
