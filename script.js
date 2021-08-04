@@ -151,18 +151,21 @@ function game() {
             endmessage.appendChild(endSymbol);
             endmessage.appendChild(para)
             endmessage.appendChild(newgame);
+            
             setTimeout(function () {
                 main.appendChild(endmessage);
                 endmessage.classList.add("animate");
             }, 100);
             if (playerScore > computerScore) {
-                endSymbol.classList.add("fas", "fa-grin-stars");
+                
                 para.textContent = "You fought the Machine and you WON!"
                 openhatSound.play();
+                endSymbol.classList.add("fas", "fa-grin-stars");
             } else if (playerScore < computerScore) {
-                endSymbol.classList.add("fas", "fa-dizzy");
+                
                 para.textContent = "You fought the Machine and you LOST!"
                 boomSound.play();
+                endSymbol.classList.add("fas", "fa-dizzy");
             }
         }
     }, 500);
